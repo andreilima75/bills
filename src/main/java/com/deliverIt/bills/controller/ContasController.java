@@ -40,7 +40,7 @@ public class ContasController {
     }
 
     @ApiOperation(value = "Apaga todas as contas do banco (usar com cuidado)")
-     @DeleteMapping("/contas")
+    @DeleteMapping("/contas")
     void deleteContas() {
         contasService.deleteAll();
     }

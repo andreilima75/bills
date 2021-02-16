@@ -1,7 +1,6 @@
 package com.deliverIt.bills.util;
 
 import com.fasterxml.jackson.core.JsonParser;
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.DeserializationContext;
 import com.fasterxml.jackson.databind.deser.std.StdDeserializer;
 import org.springframework.stereotype.Component;
@@ -16,7 +15,7 @@ public class CustomDateDeserializer extends StdDeserializer<Date> {
 
 
     private static final long serialVersionUID = 1L;
-    private SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+    private final SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
 
     public CustomDateDeserializer() {
         this(null);
@@ -28,7 +27,7 @@ public class CustomDateDeserializer extends StdDeserializer<Date> {
 
     @Override
     public Date deserialize(JsonParser jsonparser, DeserializationContext context)
-            throws IOException, JsonProcessingException {
+            throws IOException {
         String date = jsonparser.getText();
         try {
             return formatter.parse(date);

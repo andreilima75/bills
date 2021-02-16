@@ -36,7 +36,7 @@ public class ContasService {
 
     public void delete(String nome) {
         List<Contas> contas = contasRepository.findByNome(nome);
-        contas.stream().forEach(t -> contasRepository.delete(t));
+        contas.forEach(t -> contasRepository.delete(t));
     }
 
     public void deleteAll() {
@@ -46,8 +46,8 @@ public class ContasService {
     private void verificarMulta(Contas contas) {
         long difference = contas.getDataPagamento().getTime() - contas.getDataVencimento().getTime();
         long daysBetween = Math.abs(difference / (1000 * 60 * 60 * 24));
-        Integer multa = 0;
-        Double jurosDia = 0.0;
+        int multa = 0;
+        double jurosDia = 0.0;
 
         if (daysBetween > 5) {
             multa = 5;
@@ -74,7 +74,7 @@ public class ContasService {
 
     private List<ContasDTO> processarContasDTO(List<Contas> accounts) {
         List<ContasDTO> response = new ArrayList<>();
-        accounts.stream().forEach(t -> response.add(t.convertEntityToDTO()));
+        accounts.forEach(t -> response.add(t.convertEntityToDTO()));
         return response;
     }
 }
